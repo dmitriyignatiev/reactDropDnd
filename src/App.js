@@ -1,9 +1,16 @@
 import './App.css';
 import React, {useState, setState} from 'react';
 import initialData from "./Initial-data";
+import '@atlaskit/css-reset';
+import styled from 'styled-components';
 import {DragDropContext} from "react-beautiful-dnd";
-import Column from './components/column'
+import Column from './components/column';
 
+
+
+const Container = styled.div`
+    display: inline-flex;
+`;
 
 
 
@@ -26,7 +33,10 @@ const App = () => {
             return;
         }
 
+        console.log('dopobleId', draggableId)
+
         const column = state.columns[source.droppableId];
+        console.log('columnDropanleId', state.columns[source.droppableId])
         const newTaskIds = Array.from(column.taskIds)
         newTaskIds.splice(source.index, 1);
         newTaskIds.splice(destination.index, 0, draggableId);
@@ -51,13 +61,16 @@ const App = () => {
         return state.columnOrder.map(columnId => {
             const column = state.columns[columnId];
             const tasks = column.taskIds.map(taskId => state.tasks[taskId]);
-            console.log('tasks', tasks)
+
 
             return (
                 <DragDropContext
-                    onDragEnd={onDragEnd}
+                     onDragEnd={onDragEnd}
                 >
-                    <Column key={column.id} column={column} tasks={tasks}/>
+                    <Container>
+                        <Column key={column.id} column={column} tasks={tasks}/>
+                    </Container>
+
                 </DragDropContext>
             )
 
