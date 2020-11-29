@@ -21,12 +21,13 @@ const Column = (props) =>{
         <Container>
             <Title>{props.column.title}</Title>
             <Droppable droppableId={props.column.id}>
-                {provided => (
+                { provided => (
                     <TaskList
-                        innerRef={provided.innerRef}
+                        ref={provided.innerRef}
                         {...provided.droppableProps}
                     >
                         {props.tasks.map((task, index) => <Task key={task.id} tasks={task} index={index}/> )}
+                        {provided.placeholder}
                     </TaskList>
                 )}
 

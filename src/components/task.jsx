@@ -12,22 +12,26 @@ const Container = styled.div`
 
 const Task = (props) => {
    console.log('props Task', props)
+    console.log('index', props.index)
    return(
-       <Draggable draggableId={props.task.id}
-                  index={props.index}>
-           {(provided) => (
-               <Container
-                   {...provided.droppableProps}
-                   {...provided.dragHandleProps}
-                   innerRef={provided.innerRef}
-               >
-                   {props.tasks.content}
-               </Container>
-           )}
+            <Draggable draggableId={props.tasks.id} index={props.index}>
+                {provided => (
+                    <Container
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                    >
+                        {props.tasks.content}
+                    </Container>
 
-       </Draggable>
+                )}
 
-   )
+            </Draggable>
+                )
 }
+
+
+
+
 
 export default Task;
